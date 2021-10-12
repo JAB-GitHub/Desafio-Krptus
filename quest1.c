@@ -40,7 +40,7 @@ void put(element *list_exist, int new_data){
         list_p = list_p->next_element;
     }
 
-    list_p->next_element = (element*)malloc(sizeof(element));
+    list_p->next_element = (element*)malloc(sizeof(struct element_list));
     list_p->next_element->data = new_data;
     list_p->next_element->next_element = NULL;
     
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]){
     char input[201];
 
     //Esta lista terá um elemento zero para ter manter a referência do início da lista
-    element *list=(element*)malloc(sizeof(element_list));
+    element *list=(element*)malloc(sizeof(struct element_list));
     list->data = -1;
     list->next_element = NULL;
 
