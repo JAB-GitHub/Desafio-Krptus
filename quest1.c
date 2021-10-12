@@ -22,16 +22,29 @@ first: imprime o primeiro elemento da lista
 last: imprime o últiimp elemento da lista
 */
 
-void put(element *list_exist, int new_data){
+void list(element *list_exist){    
+    element *print_element;
+    print_element = list_exist->next_element;//Pula o elemento zero da lista
 
-    while (list_exist->next_element != NULL){
-        list_exist = list_exist->next_element;
+    while (print_element != NULL){
+        printf("%d ",print_element->data);
+        print_element = print_element->next_element;
+    }
+    printf("\n");
+}
+
+void put(element *list_exist, int new_data){
+    element * list_p;
+    list_p = list_exist;
+    while (list_p->next_element != NULL){
+        list_p = list_p->next_element;
     }
 
-    list_exist->next_element = (element*)malloc(sizeof(element));
-    list_exist->next_element->data = new_data;
-    list_exist->next_element->next_element = NULL;
+    list_p->next_element = (element*)malloc(sizeof(element));
+    list_p->next_element->data = new_data;
+    list_p->next_element->next_element = NULL;
     
+    list(list_exist);
 }
 
 void get(element *list_exist, int pos){
@@ -45,29 +58,21 @@ void get(element *list_exist, int pos){
 
 }
 
-void list(element *list_exist){    
-    element *print_element;
-    print_element = list_exist->next_element;//Pula o elemento zero da lista
-
-    while (print_element != NULL){
-        printf("%d ",print_element->data);
-        print_element = print_element->next_element;
-    }
-    printf("\n");
-}
-
 void remove_element(element *list_exist, int pos){
     int i;
-    element *will_remove;
+    element *will_remove, *list_r;
+    list_r = list_exist;
 
     for (i=0; i!=pos-1; i++){//Lógica: queremos obter o elemento anterior ao que iremos remover
-        list_exist = list_exist->next_element;
+        list_r = list_r->next_element;
     }
-    will_remove = list_exist->next_element;
+    will_remove = list_r->next_element;
 
-    list_exist->next_element = will_remove->next_element;
+    list_r->next_element = will_remove->next_element;
 
+    printf("%d\n", will_remove->data);
     free(will_remove);
+    list(list_exist);
 }
 
 
